@@ -1,0 +1,3 @@
+This is a driver library to control ROHM [BD2808](https://www.rohm.com/products/power-management/led-drivers/constant-current-serial-in-parallel-out/bd2808muv-m-product) 24-channel LED controller chip on Future Elctronics Sequana board under [Mbed OS](https://www.mbed.com/en/platform/mbed-os/).
+
+More details will follow...
