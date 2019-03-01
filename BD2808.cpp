@@ -120,8 +120,8 @@ void BD2808::max_current(float red_current, float green_current, float blue_curr
     bd2808_send_command(init_command, sizeof(init_command), _usage != DMA_USAGE_NEVER);
 }
 
-
-#define limit(c)    ((c == 0)? 0 : c - 1)
+// Maximum allowed PWM value is 254, so cut off intensity at this level
+#define limit(c)    ((c >= 255)? 254 : c)
 
 void BD2808::set_color(int led_id, BGR24_color_t value)
 {
