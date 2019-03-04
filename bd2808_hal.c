@@ -255,6 +255,9 @@ static void init_pins(bd2808_t *obj)
     MBED_ASSERT(obj->pin_mosi = P5_4);
     pin_function(obj->pin_sclk, CY_PIN_OUT_FUNCTION(P5_6_DSI_GPIO, obj->clock));
     pin_function(obj->pin_mosi, CY_PIN_OUT_FUNCTION(P5_4_DSI_GPIO, obj->clock));
+    // Enable outputs.
+    Cy_GPIO_Write(Cy_GPIO_PortToAddr(CY_PORT(obj->pin_mosi)), CY_PIN(obj->pin_mosi), 1);
+    Cy_GPIO_Write(Cy_GPIO_PortToAddr(CY_PORT(obj->pin_sclk)), CY_PIN(obj->pin_sclk), 1);
 }
 
 /*
