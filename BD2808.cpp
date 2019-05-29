@@ -25,9 +25,9 @@
 namespace mbed {
 
 
-#define LED_CURRENT_RED         mA(2)
-#define LED_CURRENT_GREEN       mA(2)
-#define LED_CURRENT_BLUE        mA(2)
+#define LED_CURRENT_RED         mA(2.0)
+#define LED_CURRENT_GREEN       mA(4.2)
+#define LED_CURRENT_BLUE        mA(1.2)
 
 
 uint8_t reset_command[] = {
