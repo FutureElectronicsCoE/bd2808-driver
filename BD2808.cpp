@@ -30,7 +30,7 @@ namespace mbed {
 #define LED_CURRENT_BLUE        mA(1.2)
 
 
-uint8_t reset_command[] = {
+uint8_t reset_command[] __attribute__((aligned(sizeof(uint16_t)))) = {
     0xff, 0xff,                 // wakeup sequence
     0x00,                       // device address
     BD2808_REG_MODE,            // config starts with MODE register
@@ -38,7 +38,7 @@ uint8_t reset_command[] = {
     0xff
 };
 
-uint8_t init_command[] = {
+uint8_t init_command[] __attribute__((aligned(sizeof(uint16_t)))) = {
     0xff, 0xff,                 // wakeup sequence
     0x00,                       // device address
     BD2808_REG_MODE,            // config starts with MODE register
@@ -54,7 +54,7 @@ uint8_t init_command[] = {
 #define BLUE_CURRENT_OFFSET     7
 
 
-uint8_t display_command[] = {
+uint8_t display_command[] __attribute__((aligned(sizeof(uint16_t)))) = {
     0xff, 0xff,
     0x00,                       // device address
     BD2808_REG_BR_BASE,         // starts with BRR0 register

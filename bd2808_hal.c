@@ -50,8 +50,9 @@
 
 
 // UDB device API declarations
-#define BD2808_FIFO_REG             (UDB->WRKMULT.F0[8])
-#define BD2808_STATUS_REG           (UDB->WRKMULT.ST[9])
+#define BD2808_FIFO_REG             (((volatile UDB_Type*)UDB)->WRKMULT.F0[8])
+#define BD2808_STATUS_REG           (((volatile UDB_Type*)UDB)->WRKMULT.ST[9])
+#define BD2808_AUX_CTRL_REG         (((volatile UDB_Type*)UDB)->WRKMULT.ACTL[8])
 
 /* Status register bits */
 #define SHIFTER_STS_TX_READY        (0x01u)
@@ -288,6 +289,7 @@ void bd2808_init(bd2808_t *obj)
     init_pins(obj);
     init_clock(obj, BD2808_DEFAULT_SPEED);
     configure_UDBs();
+    BD2808_AUX_CTRL_REG |= 0x0404u; // Set FIFO level to half full.
     configure_DMA();
 }
 
@@ -314,8 +316,7 @@ void bd2808_send_command(uint8_t *command, uint32_t size, bool use_dma)
     } else {
         uint32_t i;
         uint16_t *ptr = (uint16_t*)command;
-
-        for (i = 0; i < size; i+= sizeof(*ptr)) {
+        for (i = 0; i < size; i += sizeof(*ptr)) {
             send_data_word(*ptr++);
         }
     }
